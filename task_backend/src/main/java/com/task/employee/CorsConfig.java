@@ -15,7 +15,7 @@ public class CorsConfig {
                 registry.addMapping("/api/**")
                         .allowedOrigins(
                             "http://localhost:5173",
-                            "https://your-frontend.vercel.app"
+                            "https://manikanta-taskmanager.vercel.app"
                         )
                         .allowedMethods(
                             "GET", "POST", "PUT", "DELETE", "OPTIONS"
