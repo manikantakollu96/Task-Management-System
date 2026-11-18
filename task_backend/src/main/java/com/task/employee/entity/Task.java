@@ -13,18 +13,14 @@ import java.time.LocalDate;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Task title is required
     @NotBlank(message = "Task title is required")
     private String title;
 
-    // Task description is required
     @NotBlank(message = "Task description is required")
     private String description;
 
-    // Only these three statuses are allowed
     @NotBlank(message = "Task status is required")
     @Pattern(
         regexp = "PENDING|IN_PROGRESS|COMPLETED",
@@ -32,7 +28,6 @@ public class Task {
     )
     private String status;
 
-    // Only LOW, MEDIUM, or HIGH priorities are allowed
     @NotBlank(message = "Task priority is required")
     @Pattern(
         regexp = "LOW|MEDIUM|HIGH",
@@ -40,16 +35,12 @@ public class Task {
     )
     private String priority;
 
-    // Due date is required
     @NotNull(message = "Due date is required")
     private LocalDate dueDate;
 
-    // Many tasks can belong to one employee
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
-
-    // Getters and setters
 
     public Long getId() {
         return id;

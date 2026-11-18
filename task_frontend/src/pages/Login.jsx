@@ -22,13 +22,11 @@ function Login() {
 
             const employee = response.data;
 
-            // Save employee details for this browser session
             sessionStorage.setItem(
                 "loggedInEmployee",
                 JSON.stringify(employee)
             );
 
-            // Navigate based on employee role
             if (employee.role === "ADMIN") {
                 window.location.href = "/admin";
             } else if (employee.role === "EMPLOYEE") {
@@ -74,6 +72,13 @@ function Login() {
                 <button type="submit" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                 </button>
+
+                <p style={{ marginTop: "20px", fontSize: "14px" }}>
+                    Don't have an account?{" "}
+                    <a href="/register" style={{ color: "#2563eb" }}>
+                        Register
+                    </a>
+                </p>
             </form>
         </div>
     );

@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {
+	    "http://localhost:5173",
+	    "https://manikanta-taskmanager.vercel.app"
+	})
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
@@ -24,10 +28,29 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    // Create a new employee with validation
+    // Create a new employee (Admin functionality)
     @PostMapping
     public Employee createEmployee(@Valid @RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
+    }
+
+    // Register a new employee (Self-registration)
+    @PostMapping("/register")
+    public ResponseEntity<?> registerEmployee(
+            @Valid @RequestBody Employee employee) {
+
+        try {
+            Employee registeredEmployee =
+                    employeeService.registerEmployee(employee);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(registeredEmployee);
+
+        } catch (RuntimeException exception) {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(exception.getMessage());
+        }
     }
 
     // Retrieve all employees
@@ -36,35 +59,36 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    // Retrieve an employee by ID
+    // Retrieve employee using ID
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable Long id) {
         return employeeService.getEmployeeById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
-    // Update employee details with validation
+    // Update employee details
     @PutMapping("/{id}")
     public Employee updateEmployee(
             @PathVariable Long id,
             @Valid @RequestBody Employee employee) {
+
         return employeeService.updateEmployee(id, employee);
     }
 
-    // Delete an employee
+    // Delete employee
     @DeleteMapping("/{id}")
     public String deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
         return "Employee deleted successfully";
     }
 
-    // Get total employee count
+    // Count employees
     @GetMapping("/count")
     public long getTotalEmployeeCount() {
         return employeeService.getTotalEmployeeCount();
     }
-    
-    // Login API for Admin and Employee
+
+    // Login
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 

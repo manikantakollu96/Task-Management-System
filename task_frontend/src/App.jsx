@@ -1,5 +1,6 @@
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import EmployeeDashboard from "./pages/EmployeeDashboard";
 import "./pages/Login.css";
@@ -24,6 +25,11 @@ function App() {
     // Display Employee Dashboard
     if (currentPath === "/employee" && employee?.role === "EMPLOYEE") {
         return <EmployeeDashboard employee={employee} />;
+    }
+
+    // Display Registration Page
+    if (currentPath === "/register") {
+        return <Register />;
     }
 
     // Otherwise display Login Page

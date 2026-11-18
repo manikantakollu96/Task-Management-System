@@ -510,3 +510,188 @@
         padding: 6px 8px;
     }
 }
+
+/* ================================
+   EMPLOYEE NOTIFICATIONS
+================================ */
+
+.employee-topbar {
+    position: relative;
+}
+
+/* Bell sits directly in the dark navy header, outside the orange profile block */
+.employee-notification-button {
+    position: relative;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    margin: 0 16px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 0;
+    color: #fff;
+    background: transparent;
+    box-shadow: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: opacity .18s ease, transform .18s ease;
+}
+
+.employee-notification-button:hover,
+.employee-notification-button:active {
+    color: #fff;
+    background: transparent;
+    border: 0;
+    opacity: .82;
+}
+
+.employee-notification-button:focus {
+    outline: none;
+}
+
+.employee-notification-button:focus-visible {
+    outline: 2px solid #ffd166;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.employee-notification-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+}
+
+.employee-notification-count {
+    position: absolute;
+    top: 3px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--employee-navy);
+    border-radius: 999px;
+    color: #fff;
+    background: var(--employee-orange);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.employee-notification-panel {
+    position: absolute;
+    top: 75px;
+    right: 25px;
+    width: 360px;
+    max-width: calc(100vw - 30px);
+    max-height: 420px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+}
+
+.employee-notification-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 10px;
+}
+
+.employee-notification-heading h3 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 17px;
+}
+
+.employee-notification-heading span {
+    font-size: 12px;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 5px 9px;
+    border-radius: 20px;
+}
+
+.employee-notification-empty {
+    text-align: center;
+    color: #64748b;
+    padding: 25px 10px;
+    font-size: 14px;
+}
+
+.employee-notification-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.employee-notification-item {
+    padding: 13px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 6px;
+}
+
+.employee-notification-item.unread {
+    background: #eff6ff;
+}
+
+.employee-notification-message p {
+    margin: 0 0 7px;
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.employee-notification-message small {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.employee-mark-read-button {
+    margin-top: 9px;
+    padding: 6px 11px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.employee-mark-read-button:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 760px) {
+    .employee-notification-button {
+        margin: 0 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .employee-notification-button {
+        width: 40px;
+        height: 40px;
+        margin: 0 4px;
+    }
+
+    .employee-notification-panel {
+        right: 10px;
+        top: 68px;
+        width: calc(100vw - 20px);
+    }
+}

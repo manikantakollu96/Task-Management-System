@@ -1,3 +1,4 @@
+
 package com.task.employee.service;
 
 import com.task.employee.entity.Employee;
@@ -7,8 +8,11 @@ import java.util.Optional;
 
 public interface EmployeeService {
 
-    // Create a new employee
+    // Create a new employee (Admin functionality)
     Employee createEmployee(Employee employee);
+
+    // Register a new employee (Self-registration)
+    Employee registerEmployee(Employee employee);
 
     // Retrieve all employees
     List<Employee> getAllEmployees();
@@ -24,7 +28,7 @@ public interface EmployeeService {
 
     // Count the total number of employees
     long getTotalEmployeeCount();
-    
+
     // Login using email and password
     Optional<Employee> login(String email, String password);
 }
