@@ -19,7 +19,9 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(name = "employee_code", length = 20)
+    private String employeeCode;
     // Employee name cannot be empty
     @NotBlank(message = "Employee name is required")
     private String name;
@@ -54,6 +56,14 @@ public class Employee {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getEmployeeCode() {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode) {
+        this.employeeCode = employeeCode;
     }
 
     public String getName() {

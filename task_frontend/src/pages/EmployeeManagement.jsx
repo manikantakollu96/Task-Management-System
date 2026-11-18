@@ -240,7 +240,7 @@ function EmployeeManagement() {
 
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Employee Code</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -254,7 +254,7 @@ function EmployeeManagement() {
 
                                     <tr key={employee.id}>
 
-                                        <td>{employee.id}</td>
+                                        <td>{employee.employeeCode}</td>
                                         <td>{employee.name}</td>
                                         <td>{employee.email}</td>
                                         <td>{employee.role}</td>

@@ -5,6 +5,10 @@ import com.task.employee.exception.EmployeeHasAssignedTasksException;
 import com.task.employee.repository.EmployeeRepository;
 import com.task.employee.repository.TaskRepository;
 
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +28,52 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
         this.taskRepository = taskRepository;
     }
-
+    
     @Override
+    @Transactional
     public Employee createEmployee(Employee employee) {
+
+        List<Employee> employees =
+                employeeRepository.findAllByOrderByIdAsc();
+
+        Pattern pattern = Pattern.compile("^EMP(\\d+)$");
+
+        int highestCodeNumber = 0;
+
+        for (Employee existingEmployee : employees) {
+
+            String code = existingEmployee.getEmployeeCode();
+
+            if (code != null) {
+
+                Matcher matcher = pattern.matcher(code);
+
+                if (matcher.matches()) {
+
+                    int number = Integer.parseInt(matcher.group(1));
+
+                    highestCodeNumber = Math.max(
+                            highestCodeNumber,
+                            number
+                    );
+                }
+            }
+        }
+
+        int nextCodeNumber = highestCodeNumber + 1;
+
+        String employeeCode = String.format(
+                Locale.ROOT,
+                "EMP%03d",
+                nextCodeNumber
+        );
+
+        employee.setEmployeeCode(employeeCode);
+
         return employeeRepository.save(employee);
     }
 
+   
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAllByOrderByIdAsc();
